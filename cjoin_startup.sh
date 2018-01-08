@@ -1,6 +1,6 @@
 #! /bin/bash
 #
-echo "current tenant URL: " $URL
+echo "current tenant URL: " $TENANT_URL
 echo "IP address to use:" $ADDRESS
 echo "host name to use:" $NAME
 echo "current setting for PORT:" $PORT
@@ -9,7 +9,7 @@ echo "login role: " $LOGIN_ROLE
 
 # check required parameters
 
-if [ "$URL" = "" ] ; then
+if [ "$TENANT_URL" = "" ] ; then
   echo No tenant URL specified.
   exec /usr/sbin/init
 fi
@@ -57,7 +57,7 @@ fi
 echo "`date`: ready to enroll" >> /var/centrify/enroll.log
 echo " paramters: $CMDPARAM"
 
-/usr/sbin/cenroll -t $URL -F all --agentauth $LOGIN_ROLE --code $CODE $CMDPARAM -f & 
+/usr/sbin/cenroll -t $TENANT_URL -F all --agentauth $LOGIN_ROLE --code $CODE $CMDPARAM -f & 
 set -e
 
 exec /usr/sbin/init

@@ -7,7 +7,7 @@ FROM centos:7.4.1708
 #
 # build time argument
 # TENANT_URL: tenant URL
-ARG TENANT_URL
+# ARG TENANT_URL
 
 #
 # environment variables
@@ -28,7 +28,7 @@ ENV NAME ""
 ENV ADDRESS ""
 ENV CONNECTOR ""
 ENV LOGIN_ROLE ""
-ENV URL $TENANT_URL
+ENV TENANT_URL ""
 ENV HTTP_PORT ${PORT:-22}
 
 STOPSIGNAL SIGRTMIN+3
