@@ -52,7 +52,7 @@ VOLUME [ "/sys/fs/cgroup" ]
 # note that systemd comes with journald in CentOS...no need to install rsyslog
 
 # install net-tools so we can figure out our IP address
-yum -y install net-tools
+RUN yum -y install net-tools
 
 # enable and start services
 RUN systemctl enable sshd.service
