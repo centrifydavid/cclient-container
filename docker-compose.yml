@@ -11,10 +11,10 @@ services:
         - '2020:22'
       environment:
         - 'PORT=2020'
-        - 'LOGIN_ROLE=UnixUsers'
-        - 'CONNECTOR=DC1'
-        - 'TENANT_URL=davidmcneely.my-qa.centrify.com'
-        - 'CODE=A7C9B8CC-874B-4E3A-AFFB-051B0F91BDE8'
+        - 'LOGIN_ROLE=AUTHORIZED_ROLE_HERE'
+        - 'CONNECTOR=CONNECTOR_ID_HERE'
+        - 'TENANT_URL=cloud.centrify.com'
+        - 'CODE=<CODE GOES HERE>'
       volumes: 
         - /sys/fs/cgroup:/sys/fs/cgroup
       cap_add:
