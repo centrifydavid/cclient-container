@@ -1,7 +1,7 @@
 #! /bin/bash
 #
 echo "current tenant URL: " $TENANT_URL
-echo "IP address to use:" $ADDRESS
+# echo "IP address to use:" $ADDRESS
 echo "host name to use:" $NAME
 echo "current setting for PORT:" $PORT
 echo "connectors setting: " $CONNECTOR
@@ -24,7 +24,7 @@ if [ "$LOGIN_ROLE" = "" ] ; then
   exec /usr/sbin/init
 fi
 
-# set up command line parameters
+# set up cenroll command line parameters
 CMDPARAM=" "
 
 if [ "$PORT" != "" ] ; then
@@ -35,9 +35,8 @@ if [ "$NAME" != "" ] ; then
   CMDPARAM="$CMDPARAM""--name $NAME "
 fi
 
-if [ "$ADDRESS" != "" ] ; then
-  CMDPARAM="$CMDPARAM""--address $ADDRESS "
-fi
+ADDRESS="$(ifconfig | grep -A 1 'eth0' | tail -1 | awk '{print $2}')"
+CMDPARAM="$CMDPARAM""--address $ADDRESS "
 
 if [ "$CONNECTOR" != "" ] ; then
   CMDPARAM="$CMDPARAM""-S Connectors:$CONNECTOR "

@@ -33,13 +33,12 @@ ENV HTTP_PORT ${PORT:-22}
 
 STOPSIGNAL SIGRTMIN+3
 
+# install and configure openssh
 RUN yum -y update && yum install -y openssh-server vim openssh-clients
 RUN mkdir /var/run/sshd
 RUN ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N ''
-
 RUN sed -i '/^PermitRootLogin/c\PermitRootLogin yes' /etc/ssh/sshd_config
 RUN sed -i '/^ChallengeResponseAuthentication/c\ChallengeResponseAuthentication yes' /etc/ssh/sshd_config
-
 # SSH login fix. Otherwise user is kicked off after login
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 
@@ -51,6 +50,9 @@ RUN yum -y install systemd; yum clean all; \
 VOLUME [ "/sys/fs/cgroup" ]
 
 # note that systemd comes with journald in CentOS...no need to install rsyslog
+
+# install net-tools so we can figure out our IP address
+yum -y install net-tools
 
 # enable and start services
 RUN systemctl enable sshd.service
